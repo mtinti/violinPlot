@@ -41,6 +41,6 @@ if __name__ == '__main__':
         cols = ['median_Reporter intensity '+str(n) for n in range(1,10)]  
         fig, ax = plt.subplots()
         vp = ViolinPlot(in_df)
-        ax = vp.plot(cols, ax)
+        ax = vp.plot(cols=cols, ax=ax,log=True)
         plt.savefig('violin_plot.svg')
         plt.show()
