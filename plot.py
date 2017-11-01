@@ -12,11 +12,11 @@ class ViolinPlot():
     def __init__(self, df = pd.DataFrame()):
         self.df = df
     
-    def plot(self, cols=None, ax='',log=False):
+    def plot(self, cols=[], ax='',log=False):
         #rearrange columns (vertical stack)
-        if cols == None:
+        if len(cols) == 0:
             cols=self.df.columns
-            print cols
+            #print cols
         selection =  self.df[cols]
         temp_1 = [selection[n].to_frame() for n in cols]
         temp_2 =[]
@@ -31,7 +31,6 @@ class ViolinPlot():
             temp_2 = temp_2.replace([np.inf, -np.inf], np.nan)
             temp_2.dropna(inplace=True)
         ax=sns.violinplot(x='col', y='value', data=temp_2, ax=ax)
-        plt.xticks(rotation=40,ha='right')
         return ax
         
 
@@ -42,5 +41,6 @@ if __name__ == '__main__':
         fig, ax = plt.subplots()
         vp = ViolinPlot(in_df)
         ax = vp.plot(cols=cols, ax=ax,log=True)
+        plt.xticks(rotation=40,ha='right')
         plt.savefig('violin_plot.svg')
         plt.show()
