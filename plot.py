@@ -12,7 +12,7 @@ class ViolinPlot():
     def __init__(self, df = pd.DataFrame()):
         self.df = df
     
-    def plot(self, cols=[], ax='',log=False):
+    def plot(self, cols=[], ax='', log=False):
         #rearrange columns (vertical stack)
         if len(cols) == 0:
             cols=self.df.columns
@@ -41,6 +41,11 @@ if __name__ == '__main__':
         fig, ax = plt.subplots()
         vp = ViolinPlot(in_df)
         ax = vp.plot(cols=cols, ax=ax,log=True)
-        plt.xticks(rotation=40,ha='right')
+        xtick_position = range(len(cols))
+        plt.xticks(xtick_position,  rotation=40,ha='right')
+        #to use only number in ticks
+        #plt.xticks(xtick_position,  xtick_position)
+        #to change the tick labels
+        #plt.xticks(xtick_position,  [str('a') for a in cols])
         plt.savefig('violin_plot.svg')
         plt.show()
